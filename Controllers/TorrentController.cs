@@ -22,6 +22,9 @@ namespace crawler.Controllers
         [HttpGet]
         public ActionResult<List<Torrent>> Get() => _torrentService.Get();
 
+        [HttpGet("test")]
+        public string Test() => "yes reached test endpoint";
+
 
         [HttpGet("{id}", Name = "GetTorrent")]
         public ActionResult<Torrent> Get(string url) {

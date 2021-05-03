@@ -1,0 +1,20 @@
+
+{
+    "region" : "ap-south-1",
+    "configuration" : "Debug",
+    "framework"     : "netcoreapp3.1",
+    "self-contained" : false,
+    "application"    : "crawler",
+    "environment"    : "crawler-dev",
+    "enable-xray"    : false,
+    "enhanced-health-type" : "basic",
+    "additional-options"   : "\"aws:autoscaling:launchconfiguration,SecurityGroups\"=\"sg-085b7b73\";\"aws:ec2:vpc,Subnets\"=\"subnet-bb80d7f7\"",
+    "proxy-server"         : "nginx",
+    "solution-stack"       : "64bit Amazon Linux 2 v2.1.4 running .NET Core",
+    "environment-type"     : "SingleInstance",
+    "cname"                : "crawler-dev",
+    "instance-type"        : "t3a.medium",
+    "key-pair"             : "kaustubh",
+    "instance-profile"     : "aws-elasticbeanstalk-ec2-role",
+    "service-role"         : "aws-elasticbeanstalk-service-role"
+}
