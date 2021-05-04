@@ -27,7 +27,13 @@ namespace crawler.Services
 
 
         public async Task Create(Torrent torrent) {
-            await _torrents.InsertOneAsync(torrent);
+            try {
+                await _torrents.InsertOneAsync(torrent);
+            }
+            catch (Exception ex) {
+                Console.WriteLine(ex.Message);
+            }
+            
         }
 
        
