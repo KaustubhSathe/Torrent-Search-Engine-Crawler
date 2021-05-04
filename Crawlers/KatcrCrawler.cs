@@ -22,8 +22,7 @@ namespace crawler.Crawlers
         }
         public async void Crawl()
         {
-            var browserFetcher = new BrowserFetcher();
-            await browserFetcher.DownloadAsync();
+            
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = true,

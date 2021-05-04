@@ -15,7 +15,8 @@ namespace crawler
         public static async Task Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            
+            var browserFetcher = new BrowserFetcher();
+            await browserFetcher.DownloadAsync();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
