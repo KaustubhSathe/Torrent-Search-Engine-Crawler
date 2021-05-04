@@ -26,9 +26,13 @@ namespace crawler.Crawlers
             await browserFetcher.DownloadAsync();
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = true
+                Headless = true,
+                Args = new string[] { "--no-sandbox"} 
             });
             Console.WriteLine("Ok reached till here");
+            Console.WriteLine("Ok reached till here");
+            Console.WriteLine("Ok reached till here");
+
             //foreach (var x in categories) {
             //    new Thread(() => {
             //        crawlCategory(x, browser);
