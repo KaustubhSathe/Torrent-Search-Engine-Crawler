@@ -39,24 +39,21 @@ namespace crawler.Crawlers
             });
             Console.WriteLine("OK started the browser.");
 
-            foreach (var x in categories)
-            {
-
-                await crawlCategory(x, browser);
-
+            foreach (var x in categories) {
+                new Thread(() => {
+                    crawlCategory(x, browser);
+                }).Start();
             }
 
 
-
-
+            
         }
 
         private async Task crawlCategory(string category, Browser browser)
         {
             // iterate over all the pages 
-            for (int i = 1; i <= maxPages; i++)
-            {
-                await crawlPageNumber(i, category, browser);
+            for (int i = 1;i<=maxPages;i++) {
+                await crawlPageNumber(i,category,browser);
             }
 
             Console.WriteLine("Finished crawling " + category);
@@ -85,9 +82,9 @@ namespace crawler.Crawlers
                 Element torrentRow = table.Child(i);
                 Elements tableCols = torrentRow.Children.Select("td");
 
-
+                
                 string torrentName = tableCols[0].Children.Select("div")[2].Children.Select("a").Text.ToString().Trim();
-                string torrentURL = siteURL.Remove(siteURL.Length - 1) + tableCols[0].Children.Select("div")[2].Children.Select("a").Attr("href").ToString().Trim();
+                string torrentURL = siteURL.Remove(siteURL.Length-1) + tableCols[0].Children.Select("div")[2].Children.Select("a").Attr("href").ToString().Trim();
                 string torrentSize = tableCols[1].Text.ToString().Trim();
                 string uploadDate = tableCols[3].Text.ToString().Trim();
                 string seeders = tableCols[4].Text.ToString().Trim();
@@ -122,14 +119,12 @@ namespace crawler.Crawlers
             return Int32.Parse(leechers.Trim());
         }
 
-        private DateTime cleanifyDate(string uploadDate)
-        {
-            if (uploadDate.ToLower().Contains("hour"))
-            {
+        private DateTime cleanifyDate(string uploadDate) {
+            if (uploadDate.ToLower().Contains("hour")) {
                 uploadDate = uploadDate.Replace("hours", "");
                 uploadDate = uploadDate.Replace("hour", "");
-                uploadDate = uploadDate.Trim();
-                return DateTime.UtcNow.AddHours(-1 * Int32.Parse(uploadDate));
+                uploadDate =  uploadDate.Trim();
+                return DateTime.UtcNow.AddHours(-1*Int32.Parse(uploadDate));
             }
 
 
@@ -147,7 +142,7 @@ namespace crawler.Crawlers
         }
 
 
-
+        
 
 
     }
