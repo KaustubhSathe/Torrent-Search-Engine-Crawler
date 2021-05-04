@@ -3,6 +3,7 @@ using MongoDB.Driver;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace crawler.Services
@@ -25,9 +26,17 @@ namespace crawler.Services
         public Torrent Get(string url) => _torrents.Find<Torrent>(itr => itr.url == url).FirstOrDefault();
 
 
-        public Torrent Create(Torrent torrent) {
-            _torrents.InsertOne(torrent);
-            return torrent;
+        public async Task Create(Torrent torrent) {
+            await _torrents.InsertOneAsync(torrent);
+        }
+
+       
+
+        public List<Torrent> Search(string query,int page) {
+            return _torrents.Find(x => x.Name.Contains(query))
+                .Skip((page-1)*25)
+                .Limit(25)
+                .ToList();
         }
 
     }
