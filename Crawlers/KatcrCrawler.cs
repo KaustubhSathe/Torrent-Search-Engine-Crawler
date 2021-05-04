@@ -22,16 +22,18 @@ namespace crawler.Crawlers
         }
         public async void Crawl()
         {
+            var browserFetcher = new BrowserFetcher();
+            await browserFetcher.DownloadAsync();
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
-                Headless = false
+                Headless = true
             });
-
-            foreach (var x in categories) {
-                new Thread(() => {
-                    crawlCategory(x, browser);
-                }).Start();
-            }
+            Console.WriteLine("Ok reached till here");
+            //foreach (var x in categories) {
+            //    new Thread(() => {
+            //        crawlCategory(x, browser);
+            //    }).Start();
+            //}
         }
 
         private async void crawlCategory(string category,Browser browser) {
