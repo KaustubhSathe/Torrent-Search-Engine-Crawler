@@ -12,11 +12,10 @@ namespace crawler
 {
     public class Program
     {
-        public static async Task Main(string[] args)
+        public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
-            var browserFetcher = new BrowserFetcher();
-            await browserFetcher.DownloadAsync();
+
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>

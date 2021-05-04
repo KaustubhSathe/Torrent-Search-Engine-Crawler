@@ -22,26 +22,26 @@ namespace crawler.Crawlers
         }
         public async void Crawl()
         {
-            
+            var browserFetcher = new BrowserFetcher();
+            await browserFetcher.DownloadAsync();
             var browser = await Puppeteer.LaunchAsync(new LaunchOptions
             {
                 Headless = true,
-                Args = new string[] { "--no-sandbox"} 
+                Args = new string[] { "--no-sandbox" } 
             });
-            Console.WriteLine("Ok reached till here");
-            Console.WriteLine("Ok reached till here");
-            Console.WriteLine("Ok reached till here");
+            Console.WriteLine("OK started the browser.");
 
-            //foreach (var x in categories) {
-            //    new Thread(() => {
-            //        crawlCategory(x, browser);
-            //    }).Start();
-            //}
+            foreach (var x in categories) {
+                new Thread(() => {
+                    crawlCategory(x, browser);
+                }).Start();
+            }
         }
 
         private async void crawlCategory(string category,Browser browser) {
             var page = await browser.NewPageAsync();
             await page.GoToAsync(url + category);
+            Console.WriteLine("Reached to website" + url + category);
         }
 
         
