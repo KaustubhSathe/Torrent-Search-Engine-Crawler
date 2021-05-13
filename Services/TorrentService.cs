@@ -38,7 +38,7 @@ namespace crawler.Services
 
        
 
-        public List<Torrent> Search(string query,int page) {
+        public List<Torrent> Search(string query,int page = 1) {
             return _torrents.Find(x => x.Name.Contains(query))
                 .Skip((page-1)*25)
                 .Limit(25)

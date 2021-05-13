@@ -39,9 +39,9 @@ namespace crawler.Controllers
         }
 
         [HttpPost]
-        public ActionResult<Torrent> Create(Torrent torrent)
+        public async Task<ActionResult<Torrent>> CreateAsync(Torrent torrent)
         {
-            _torrentService.Create(torrent);
+            await _torrentService.Create(torrent);
 
             return CreatedAtRoute("GetTorrent", new { url = torrent.url.ToString() }, torrent) ;
         }
