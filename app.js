@@ -1,16 +1,11 @@
-var createError = require('http-errors');
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
-import helmet from "helmet";
-import mongoose from "mongoose";
-import { torrent } from "./torrent";
-import { connectionURL } from "./config";
-var app = express();
+const express = require('express');
+const cookieParser = require('cookie-parser');
+const helmet = require("helmet");
+const mongoose = require("mongoose");
+const {torrent} = require("./torrent");
+const { connectionURL } = require("./config");
+const app = express();
 
-
-app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -25,31 +20,14 @@ mongoose.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: tru
 });
 
 
-
-// catch 404 and forward to error handler
-app.use(function (req, res, next) {
-  next(createError(404));
-});
-
-// error handler
-app.use(function (err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
-
-  // render the error page
-  res.status(err.status || 500);
-});
-
-
-
 const escapeRegex = (text) => {
   return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
 };
 
-app.get("/search", async (req, res) => {
+app.get("/search", (req, res) => {
   if (req.query.search) {
     const regex = new RegExp(escapeRegex(req.query.search.toString()), 'gi');
+    // console.log(req.query.search);
     torrent.find({ "Name": regex }, (err, foundTorrents) => {
       if (err) {
         console.error(err);
@@ -60,4 +38,4 @@ app.get("/search", async (req, res) => {
   }
 });
 
-module.exports = app;
+app.listen(3000,() => console.log(`listening on port 3000`));

@@ -1,4 +1,4 @@
-import mongoose from "mongoose";
+const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
     Seeders: Number,
@@ -23,4 +23,4 @@ const schema = new mongoose.Schema({
     UploadDate: Number
 }, { versionKey: false });
 
-export const torrent = mongoose.model('torrents', schema);
+module.exports.torrent = mongoose.model('torrents', schema);
