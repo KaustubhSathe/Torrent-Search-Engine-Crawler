@@ -43,7 +43,7 @@ function getDate(inp){
 async function parse(){
     const browser = await puppeteer.launch({
         headless: true,
-        args: ["--no-sandbox"]
+        args: ["--no-sandbox",'--disable-setuid-sandbox']
     });
     const puppetPage = await browser.newPage();
     for(let cat = 0;cat < categories.length;cat++){

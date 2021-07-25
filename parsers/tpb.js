@@ -46,7 +46,7 @@ function getDate(date) {
 async function tpbParser() {
     const browser = await puppeteer.launch({
         headless: true,
-        args: ["--no-sandbox"]
+        args: ["--no-sandbox",'--disable-setuid-sandbox']
     });
     const page = await browser.newPage();
     for (let category = 600; category <= 600; category += 100) {
