@@ -3,9 +3,11 @@ const cookieParser = require('cookie-parser');
 const helmet = require("helmet");
 const mongoose = require("mongoose");
 const {torrent} = require("./torrent");
+const cors = require("cors");
 const { connectionURL } = require("./config");
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -38,4 +40,4 @@ app.get("/search", (req, res) => {
   }
 });
 
-app.listen(3000,() => console.log(`listening on port 3000`));
+app.listen(3001,() => console.log(`listening on port 3001`));

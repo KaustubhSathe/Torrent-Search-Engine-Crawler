@@ -49,7 +49,7 @@ async function tpbParser() {
         args: ["--no-sandbox"]
     });
     const page = await browser.newPage();
-    for (let category = 100; category <= 600; category += 100) {
+    for (let category = 600; category <= 600; category += 100) {
         for (let pageNumber = 1; pageNumber <= 200; pageNumber++) {
             await page.goto(`${baseURL}/browse/${category}/page/${pageNumber}/`);
             let bodyHTML = await page.evaluate(() => document.body.innerHTML);
