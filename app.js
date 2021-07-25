@@ -6,6 +6,7 @@ const {torrent} = require("./torrent");
 const cors = require("cors");
 const { connectionURL } = require("./config");
 const app = express();
+const port = process.env.PORT || 5000;
 
 app.use(cors());
 app.use(express.json());
@@ -44,4 +45,4 @@ app.get("/", (req, res) => {
   res.send("Service working");
 });
 
-app.listen(8080,() => console.log(`listening on port 8080`));
+app.listen(port,() => console.log(`listening on port ${port}`));
