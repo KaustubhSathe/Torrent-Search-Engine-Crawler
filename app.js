@@ -40,4 +40,8 @@ app.get("/search", (req, res) => {
   }
 });
 
+app.get("/", (req, res) => {
+  res.send("Service working");
+});
+
 app.listen(3001,() => console.log(`listening on port 3001`));
