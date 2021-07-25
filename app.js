@@ -44,4 +44,4 @@ app.get("/", (req, res) => {
   res.send("Service working");
 });
 
-app.listen(3001,() => console.log(`listening on port 3001`));
+app.listen(80,() => console.log(`listening on port 80`));
