@@ -1,4 +1,5 @@
 const express = require('express');
+require('dotenv').config()
 const cookieParser = require('cookie-parser');
 const helmet = require("helmet");
 const mongoose = require("mongoose");
@@ -14,12 +15,14 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(helmet());
 
+// console.log(connectionURL)
+
 mongoose.connect(connectionURL, { useNewUrlParser: true, useUnifiedTopology: true }, (err) => {
   if (err) {
     console.log(err);
+  }else{
+    console.log("Connected to mongo database.");
   }
-
-  console.log("Connected to mongo database.");
 });
 
 
